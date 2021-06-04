@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
+import api from '../../services/api';
 
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
@@ -32,7 +33,8 @@ export const NewTransactionModal: React.FC<NewTransactionModalProps> = ({
       type,
     };
 
-    console.log(data);
+    api.post('transactions', data);
+
     setTitle('');
     setAmount(0);
     setCategory('');
@@ -63,7 +65,7 @@ export const NewTransactionModal: React.FC<NewTransactionModalProps> = ({
           onChange={e => setTitle(e.target.value)}
         />
         <input
-          type="number"
+          type="text"
           placeholder="Valor"
           value={amount}
           onChange={e => setAmount(Number(e.target.value))}
